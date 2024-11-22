@@ -7,9 +7,38 @@
 
 import SwiftUI
 
+enum MathOperators: String, CaseIterable{
+    case addition = "+"
+    case substraction = "-"
+    case multiplication = "*"
+    case division = "/"
+}
+
 struct GameView: View {
+    @State var answer: String = ""
+    @State var points: Int = 0
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("Guess the answer")
+            Text("What is x + 1 = ?")
+            HStack{
+                TextField("Enter answer here",text: $answer)
+                Button("Submit"){
+                    
+                }
+            }
+            
+            Text("\(points)")
+                .font(.system(size:150))
+            Button("Next"){
+                
+            }
+            
+            
+            
+            
+        }
+        
     }
 }
 
