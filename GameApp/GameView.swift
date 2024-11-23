@@ -21,6 +21,7 @@ struct GameView: View {
     @State var mathOperator: MathOperators = MathOperators.allCases.randomElement()!
     @State var firstNumber: Int = Int.random(in: 0...9)
     @State var secondNumber: Int = Int.random(in: 0...9)
+    @State var correctAnswer: Int? = nil
     
     @State var answer: Int? = nil
     @State var points: Int = 0
@@ -34,6 +35,8 @@ struct GameView: View {
             HStack{
                 TextField("Enter answer here",value : $answer , format: .number)
                 Button("Submit"){
+                   // print("Answer is \(correctAnswer)")
+                    
                     
                 }
                 .buttonStyle(.bordered)
@@ -45,6 +48,7 @@ struct GameView: View {
             Text("\(points)")
                 .font(.system(size:fontSize))
             Button("Next"){
+                randomAnswer()
                 
             }
             .buttonStyle(.bordered)
@@ -53,6 +57,9 @@ struct GameView: View {
             
             
             
+        }
+        .onAppear(){
+            randomAnswer()
         }
         
     }
@@ -67,6 +74,34 @@ struct GameView: View {
                 return .orange
             }
         }
+    
+    func  randomAnswer() {
+        
+        firstNumber = Int.random(in: 1...10)
+        secondNumber = Int.random(in: 1...10)
+        mathOperator = MathOperators.allCases.randomElement()!
+        
+        
+        
+        switch mathOperator {
+        case .addition:
+            correctAnswer = firstNumber + secondNumber
+        case .substraction:
+            correctAnswer = firstNumber - secondNumber
+        case .multiplication:
+            correctAnswer = firstNumber * secondNumber
+        case .division:
+            guard secondNumber != 0 else {
+                randomAnswer()
+                return }
+            correctAnswer = firstNumber / secondNumber
+        }
+        
+        
+        
+        
+        
+    }
 }
 
 #Preview {
