@@ -35,6 +35,13 @@ struct GameView: View {
             HStack{
                 TextField("Enter answer here",value : $answer , format: .number)
                 Button("Submit"){
+                    if (answer==correctAnswer){
+                        points += 1
+                        randomAnswer()
+                    } else{
+                        points -= 1
+                        randomAnswer()
+                    }
                    // print("Answer is \(correctAnswer)")
                     
                     
