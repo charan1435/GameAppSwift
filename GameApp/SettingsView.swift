@@ -14,9 +14,9 @@ enum AppTheme : String,CaseIterable{
 }
 
 struct SettingsView: View {
-    @State var fontSize: Double = 20.0
+    @Binding var fontSize: Double
     
-    @State var selectedColor : Color = .red
+    @Binding var selectedColor : AppTheme
     
     let colors: [Color] = [.red,.green,.orange]
     let colorNames: [String] = ["Red", "Green", "Orange"]
@@ -35,11 +35,14 @@ struct SettingsView: View {
                         theme in
                         Text(theme.rawValue)
                             .tag(theme.rawValue)
+                    
+                        
                     }
+                    
                             
                     }
                 .pickerStyle(.wheel)
-                Color(selectedColor)
+                Color(colorForTheme(selectedColor))
                     .frame(width: 30, height: 30)
                 }
             }
@@ -54,9 +57,22 @@ struct SettingsView: View {
             
             
         }
+    // Helper function to map AppTheme to Color
+        func colorForTheme(_ theme: AppTheme) -> Color {
+            switch theme {
+            case .red:
+                return .red
+            case .green:
+                return .green
+            case .orange:
+                return .orange
+            }
+        }
+    
     }
 
 
+
 #Preview {
-    SettingsView()
+    SettingsView(fontSize: .constant(20.0), selectedColor: .constant(.red))
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct GameAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(fontSize: 20.0, selectedColor: .red)
         }
     }
 }

@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var fontSize: Double
+    @State var selectedColor: AppTheme
+    
     var body: some View {
         TabView{
-            GameView()
+            GameView(fontSize: $fontSize, selectedColor: $selectedColor)
                 .tabItem{
                     Label("Game", systemImage: "house")
                 }
-            SettingsView()
+            SettingsView(fontSize: $fontSize, selectedColor: $selectedColor)
                 .tabItem{
                     Label("Settings", systemImage: "gear")
                     
@@ -24,5 +27,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(fontSize: 20.0, selectedColor: .red)
 }

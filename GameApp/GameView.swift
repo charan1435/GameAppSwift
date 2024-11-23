@@ -15,6 +15,8 @@ enum MathOperators: String, CaseIterable{
 }
 
 struct GameView: View {
+    @Binding var fontSize : Double
+    @Binding var selectedColor : AppTheme
     
     @State var mathOperator: MathOperators = MathOperators.allCases.randomElement()!
     @State var firstNumber: Int = Int.random(in: 0...9)
@@ -25,7 +27,7 @@ struct GameView: View {
     var body: some View {
         VStack{
             Text("Guess the answer")
-                .foregroundStyle(Color(.green))
+                .foregroundStyle(Color(colorForTheme(selectedColor)))
             Text("What is \(firstNumber)\(mathOperator.rawValue)\(secondNumber)")
                 .font(.largeTitle)
                 .bold()
@@ -41,7 +43,7 @@ struct GameView: View {
             .border(.black,width: 1)
             
             Text("\(points)")
-                .font(.system(size:150))
+                .font(.system(size:fontSize))
             Button("Next"){
                 
             }
@@ -54,8 +56,19 @@ struct GameView: View {
         }
         
     }
+    // Helper function to map AppTheme to Color
+        func colorForTheme(_ theme: AppTheme) -> Color {
+            switch theme {
+            case .red:
+                return .red
+            case .green:
+                return .green
+            case .orange:
+                return .orange
+            }
+        }
 }
 
 #Preview {
-    GameView()
+    GameView(fontSize: .constant(20), selectedColor: .constant(.red))
 }
