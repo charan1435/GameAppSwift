@@ -24,7 +24,7 @@ struct GameView: View {
     @State var correctAnswer: Int? = nil
     
     @State var answer: Int? = nil
-    @State var points: Int = 0
+    @AppStorage("points") var points: Int = 0
     var body: some View {
         VStack{
             Text("Guess the answer")
